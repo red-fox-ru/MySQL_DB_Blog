@@ -125,7 +125,7 @@ VALUES ('33', 8, 'minima');
 
 
 
-SELECT author.name as 'Автор', COUNT(b.id) as 'Количество_книг'
+SELECT author.name as 'Автор', COUNT(b.id) as 'Количество'
 FROM author
          JOIN books b on author.id = b.id_author
 group by author.name;
@@ -141,8 +141,9 @@ FROM author
          JOIN (SELECT * FROM books LIMIT 3) b
 ORDER BY author.id;
 
-SELECT author.name as 'Автор', b.name as 'Количество_книг'
+SELECT author.name as 'Автор', COUNT(b.id) as 'Количество'
 FROM author
          JOIN books b on author.id = b.id_author
          LEFT JOIN count_book cb on author.id = cb.id
-WHERE cb.`COUNT(b.id)` > 5;
+WHERE cb.`COUNT(b.id)` > 5
+GROUP BY author.name;
