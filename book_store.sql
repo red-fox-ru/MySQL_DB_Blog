@@ -122,6 +122,12 @@ INSERT INTO `books` (`id`, id_author, `name`)
 VALUES ('3', 7, 'magnam');
 INSERT INTO `books` (`id`, id_author, `name`)
 VALUES ('33', 8, 'minima');
+INSERT INTO `books` (`id`, id_author, `name`)
+VALUES ('34', 14, 'miima');
+INSERT INTO `books` (`id`, id_author, `name`)
+VALUES ('37', 15, 'pirna');
+INSERT INTO `books` (`id`, id_author, `name`)
+VALUES ('36', 13, 'zaoaq');
 
 
 
@@ -136,10 +142,11 @@ FROM author
          JOIN books b on author.id = b.id_author
 group by author.id;
 
-SELECT author.name as 'Автор', b.name as 'Книга'
+SELECT author.id, author.name as 'Автор', b.name as 'Книга'
 FROM author
-         JOIN (SELECT * FROM books LIMIT 3) b
-ORDER BY author.id;
+         LEFT JOIN books b on author.id = b.id_author
+GROUP BY b.name
+HAVING COUNT(b.id) < 3;
 
 SELECT author.name as 'Автор', COUNT(b.id) as 'Количество'
 FROM author
